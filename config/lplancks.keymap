@@ -280,10 +280,10 @@
 
         default_layer {
             bindings = <
-&kp ESC         &kp Q     &kp W     &kp E        &kp R  &kp T      &kp Y  &kp U  &kp I      &kp O     &kp P     &kp BSPC
-&lt NUM TAB     &kp A     &kp S     &kp D        &kp F  &kp G      &kp H  &kp J  &kp K      &kp L     &kp RBKT  &kp RET
-&mt LSHFT CAPS  &kp Z     &kp X     &kp C        &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT   &kp UP    &kp RSHFT
-&kp LCTRL       &kp LGUI  &kp LALT  &lt 1 SPACE  &none  &kp SPACE  &none  &mo 2  &kp DEL    &kp LEFT  &kp DOWN  &kp RIGHT
+&kp ESC         &kp Q     &kp W     &kp E        &kp R  &kp T      &kp Y  &kp U  &kp I       &kp O           &kp P           &kp BSPC
+&lt NUM TAB     &kp A     &kp S     &kp D        &kp F  &kp G      &kp H  &kp J  &kp K       &kp L           &kp RBKT        &kp RET
+&mt LSHFT CAPS  &kp Z     &kp X     &kp C        &kp V  &kp B      &kp N  &kp M  &kp COMMA   &kp DOT         &kp UP          &kp RSHFT
+&kp LCTRL       &kp LGUI  &kp LALT  &lt 1 SPACE         &kp SPACE         &mo 2  &kp DELETE  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW
             >;
         };
 
@@ -292,16 +292,16 @@
 &kp GRAVE  &kp N1    &kp N2     &kp N3    &kp N4    &kp N5     &kp N6     &kp N7    &kp N8     &kp N9        &kp N0      &kp MINUS
 &kp TILDE  &kp EXCL  &kp AT     &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR      &kp RPAR    &kp HOME
 &trans     &kp NUBS  &trans     &trans    &trans    &trans     &ma_1      &ma_2     &ma_3      &ma_4         &kp FSLH    &kp PSCRN
-&trans     &trans    &kp LSHFT  &trans    &none     &trans     &none      &trans    &trans     &kp C_VOL_DN  &kp K_MUTE  &kp C_VOL_UP
+&trans     &trans    &kp LSHFT  &trans              &trans                &trans    &trans     &kp C_VOL_DN  &kp K_MUTE  &kp C_VOL_UP
             >;
         };
 
         accent_layer {
             bindings = <
-&trans  &ma_5        &trans  &kp LBKT     &trans  &ma_6   &trans  &kp NUHS  &kp EQUAL  &kp SEMI  &ma_7    &kp PSCRN
-&trans  &kp SQT      &trans  &ma_8        &trans  &trans  &trans  &trans    &trans     &trans    &trans   &trans
-&kp F1  &kp F2       &kp F3  &kp F4       &kp F5  &kp F6  &kp F7  &kp F8    &kp F9     &kp F10   &kp F11  &kp F12
-&trans  &kp K_CMENU  &trans  &kp C_POWER  &none   &trans  &none   &trans    &kp RSHFT  &mo SYM   &trans   &trans
+&trans  &ma_5        &trans  &kp LBKT     &trans  &ma_6   &trans  &kp NUHS  &kp EQUAL        &kp SEMI  &ma_7    &kp PSCRN
+&trans  &kp SQT      &trans  &ma_8        &trans  &trans  &trans  &trans    &trans           &trans    &trans   &trans
+&kp F1  &kp F2       &kp F3  &kp F4       &kp F5  &kp F6  &kp F7  &kp F8    &kp F9           &kp F10   &kp F11  &kp F12
+&trans  &kp K_CMENU  &trans  &kp K_POWER          &trans          &trans    &kp RIGHT_SHIFT  &mo 3     &trans   &trans
             >;
         };
 
@@ -310,7 +310,7 @@
 &trans        &trans        &trans        &ma_9           &trans      &trans       &trans  &ma_10  &ma_11  &ma_12  &trans  &trans
 &trans        &ma_13        &trans        &trans          &trans      &trans       &trans  &trans  &trans  &trans  &trans  &trans
 &trans        &out OUT_TOG  &bt BT_NXT    &bt BT_CLR_ALL  &bt BT_PRV  &bootloader  &trans  &trans  &trans  &trans  &trans  &trans
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3    &none       &trans       &none   &trans  &trans  &trans  &trans  &trans
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3                &trans               &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
