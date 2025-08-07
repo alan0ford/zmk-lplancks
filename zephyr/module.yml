@@ -1,3 +1,4 @@
+name: zmk-keyboard-lplancks
 build:
   settings:
     board_root: .
