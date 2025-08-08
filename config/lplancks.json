@@ -16,7 +16,7 @@
         { "row": 0, "col":  9, "x":     9, "y": 0, "label":                                 "O" },
         { "row": 0, "col": 10, "x":    10, "y": 0, "label":                                 "P" },
         { "row": 0, "col": 11, "x":    11, "y": 0, "label":                         "BACKSPACE", "u": 1.75 },
-      
+
         { "row": 1, "col":  0, "x":     0, "y": 1, "label":                               "TAB", "u": 1.25 },
         { "row": 1, "col":  1, "x":  1.25, "y": 1, "label":                                 "A" },
         { "row": 1, "col":  2, "x":  2.25, "y": 1, "label":                                 "S" },
@@ -29,7 +29,7 @@
         { "row": 1, "col":  9, "x":  9.25, "y": 1, "label":                                 "L" },
         { "row": 1, "col": 10, "x": 10.25, "y": 1, "label":                                 "+" },
         { "row": 1, "col": 11, "x": 11.25, "y": 1, "label":                             "ENTER", "u":  1.5 },
-      
+
         { "row": 2, "col":  0, "x":     0, "y": 2, "label":                             "SHIFT", "u": 1.75 },
         { "row": 2, "col":  1, "x":  1.75, "y": 2, "label":                                 "Z" },
         { "row": 2, "col":  2, "x":  2.75, "y": 2, "label":                                 "X" },
@@ -42,7 +42,7 @@
         { "row": 2, "col":  9, "x":  9.75, "y": 2, "label":                    ">\n\n\n\n\n\n." },
         { "row": 2, "col": 10, "x": 10.75, "y": 2, "label":    "<i class='fa fa-caret-up'></i>" },
         { "row": 2, "col": 11, "x": 11.75, "y": 2, "label":                             "SHIFT" },
-      
+
         { "row": 3, "col":  0, "x":     0, "y": 3, "label":                              "CTRL", "u": 1.25 },
         { "row": 3, "col":  1, "x":  1.25, "y": 3, "label":                               "WIN", "u": 1.25 },
         { "row": 3, "col":  2, "x":   2.5, "y": 3, "label":                               "ALT", "u": 1.25 },
@@ -55,5 +55,6 @@
         { "row": 3, "col": 11, "x": 11.75, "y": 3, "label": "<i class='fa fa-caret-right'></i>" }
       ]
     }
-  }
+  },
+  "sensors": []
 }
