@@ -287,6 +287,17 @@
 			tapping-term-ms = <200>;
 			bindings = <&caps_lock>, <&capslock_led>;
 		};
+
+		caps_lock: caps_lock {
+            compatible = "zmk,behavior-key-press";
+            label = "Caps Lock";
+            #binding-cells = <0>;
+            keycode = <KEY_CAPSLOCK>;
+        };
+
+
+		
+		
     };
 
     keymap {
