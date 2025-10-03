@@ -273,7 +273,20 @@
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+		};
+		
+		capslock_led: behavior_capslock_led {
+            compatible = "zmk,behavior-capslock-led";
+            label = "CapsLock LED";
         };
+		
+		capslock_combo: capslock_combo {
+			compatible = "zmk,behavior-tap-dance";
+			label = "CapsLock Combo";
+			#binding-cells = <0>;
+			tapping-term-ms = <200>;
+			bindings = <&caps_lock>, <&capslock_led>;
+		};
     };
 
     keymap {
@@ -283,7 +296,7 @@
             bindings = <
 &kp ESC         &kp Q     &kp W     &kp E        &kp R  &kp T      &kp Y  &kp U  &kp I       &kp O           &kp P           &kp BSPC
 &lt NUM TAB     &kp A     &kp S     &kp D        &kp F  &kp G      &kp H  &kp J  &kp K       &kp L           &kp RBKT        &kp RET
-&mt LSHFT CAPS  &kp Z     &kp X     &kp C        &kp V  &kp B      &kp N  &kp M  &kp COMMA   &kp DOT         &kp UP          &kp RSHFT
+&mt LSHFT capslock_combo  &kp Z     &kp X     &kp C        &kp V  &kp B      &kp N  &kp M  &kp COMMA   &kp DOT         &kp UP          &kp RSHFT
 &kp LCTRL       &kp LGUI  &kp LALT  &lt 1 SPACE         &kp SPACE         &mo 2  &kp DELETE  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW
             >;
         };
