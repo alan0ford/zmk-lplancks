@@ -309,7 +309,7 @@
         symbol_layer {
             bindings = <
 &trans        &trans        &trans        &ma_9           &trans      &trans           &trans           &ma_10           &ma_11           &ma_12           &trans           &trans
-&trans        &ma_13        &trans        &trans          &trans      &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &trans
+&trans        &ma_13        &trans        &trans          &trans      &ws2812_wdg  &trans  &trans  &trans  &trans  &trans  &trans
 &trans        &out OUT_TOG  &bt BT_NXT    &bt BT_CLR_ALL  &bt BT_PRV  &bootloader      &trans           &trans           &kp NUBS         &kp RS(NUBS)     &trans           &trans
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3                &trans                            &trans           &trans           &trans           &trans           &trans
             >;
