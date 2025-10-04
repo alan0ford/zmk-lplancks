@@ -46,7 +46,6 @@
     chosen {
         zmk,kscan = &kscan0;
 		zmk,matrix_transform = &default_transform;
-	/*	zmk,hid-indicators = &led_strip; */
 		zmk,underglow = &led_strip;
     };
 
