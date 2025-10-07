@@ -17,7 +17,7 @@ static const struct led_rgb COLOR_LAYER_1 = { .r = 0x00, .g = 0x00, .b = 0xFF };
 static const struct led_rgb COLOR_CAPS = { .r = 0xFF, .g = 0xFF, .b = 0xFF };    // Bianco per il Caps Lock
 
 // Prendiamo il riferimento al nostro LED WS2812 dal devicetree
-static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(led_strip));
+static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(led-strip));
 
 // Variabili globali per tenere traccia dello stato
 static bool caps_lock_on = false;
