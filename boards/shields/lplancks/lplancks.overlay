@@ -26,18 +26,14 @@
 
   led-strip: ws2812@0 {
     compatible = "worldsemi,ws2812-spi";
-
-    /* SPI */
-    reg = <0>; /* ignored, but necessary for SPI bindings */
+    reg = <0>;
     spi-max-frequency = <4000000>;
-
-    /* WS2812 */
-    chain-length = <1>; /* number of LEDs */
+    chain-length = <1>;
     spi-one-frame = <0x70>;
     spi-zero-frame = <0x40>;
     color-mapping = <LED_COLOR_ID_GREEN
-                          LED_COLOR_ID_RED
-                          LED_COLOR_ID_BLUE>;
+                     LED_COLOR_ID_RED
+                     LED_COLOR_ID_BLUE>;
   };
 };
 
@@ -45,10 +41,10 @@
     aliases {
         led-strip = &led-strip;
     };
-	
+
     chosen {
         zmk,kscan = &kscan0;
-		zmk,matrix_transform = &default_transform;
+        zmk,matrix_transform = &default_transform;
 		zmk,underglow = &led-strip;
     };
 
@@ -82,7 +78,7 @@
             , <&gpio1 13 GPIO_ACTIVE_HIGH>
             , <&gpio1 15 GPIO_ACTIVE_HIGH>
             , <&gpio0  2 GPIO_ACTIVE_HIGH>
-            ;
+        ;
 
         row-gpios
             = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
