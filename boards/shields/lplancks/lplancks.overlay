@@ -42,6 +42,10 @@
 };
 
 / {
+    aliases {
+        led_strip = &led_strip;
+    };
+	
     chosen {
         zmk,kscan = &kscan0;
 		zmk,matrix_transform = &default_transform;
