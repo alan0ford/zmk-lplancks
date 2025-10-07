@@ -39,7 +39,7 @@
 
 / {
     aliases {
-        led-strip = &led-strip;
+        led-strip = &led_strip;
     };
 
     chosen {
