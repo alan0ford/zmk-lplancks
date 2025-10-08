@@ -16,8 +16,8 @@ static const struct led_rgb COLOR_OFF = { .r = 0x00, .g = 0x00, .b = 0x00 };
 static const struct led_rgb COLOR_LAYER_1 = { .r = 0x00, .g = 0x00, .b = 0xFF }; // Blu per il layer 1
 static const struct led_rgb COLOR_CAPS = { .r = 0xFF, .g = 0xFF, .b = 0xFF };    // Bianco per il Caps Lock
 
-// Prendiamo il riferimento al nostro LED WS2812 dal devicetree
-static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(led-strip));
+// CERCHIAMO IL NUOVO ALIAS "smartled"
+static const struct device *smart_led = DEVICE_DT_GET(DT_ALIAS(smartled));
 
 // Variabili globali per tenere traccia dello stato
 static bool caps_lock_on = false;
@@ -25,7 +25,7 @@ static uint8_t current_layer = 0;
 
 // Funzione centrale che decide il colore del LED
 static void update_led_status(void) {
-    if (!device_is_ready(led_strip)) {
+    if (!device_is_ready(smart_led)) {
         return;
     }
 
@@ -33,14 +33,12 @@ static void update_led_status(void) {
 
     if (caps_lock_on) {
         color_to_set = COLOR_CAPS;
-    } else if (current_layer == 1) { // Cambia '1' con l'indice del layer che vuoi indicare
+    } else if (current_layer == 1) {
         color_to_set = COLOR_LAYER_1;
     }
-    // Puoi aggiungere altri 'else if' per altri layer qui
-    // else if (current_layer == 2) { color_to_set = ... }
 
-    // Applica il colore a tutti i LED della striscia (nel tuo caso, solo uno)
-    zmk_rgb_underglow_set_all(led_strip, &color_to_set);
+    // USIAMO LA NUOVA VARIABILE
+    zmk_rgb_underglow_set_all(smart_led, &color_to_set);
 }
 
 // Listener per il cambio di stato dei layer
