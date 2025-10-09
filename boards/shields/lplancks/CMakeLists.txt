@@ -1,1 +1,3 @@
-list(APPEND SHIELD_SRC custom_widget.c)
+list(APPEND SHIELD_SRC
+    caps_lock_led.c
+)
