@@ -4,6 +4,7 @@
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
+#include <drivers/led_strip.h>
 
 // Prendiamo il riferimento al nostro LED dal DeviceTree usando l'alias "smartled"
 static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
