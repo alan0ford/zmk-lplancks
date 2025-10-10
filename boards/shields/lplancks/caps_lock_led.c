@@ -10,10 +10,10 @@ static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
 static const struct led_rgb COLOR_ON = { .r = 0xFF, .g = 0xFF, .b = 0xFF };
 
 static int simple_listener_cb(const zmk_event_t *eh) {
-    LOG_INF("Listener chiamato - accendo LED");
+    printk("Listener chiamato - accendo LED");
 
     if (!device_is_ready(led_strip)) {
-        LOG_ERR("Device LED non pronto");
+        printk("Device LED non pronto");
         return ZMK_EV_EVENT_BUBBLE;
     }
 
