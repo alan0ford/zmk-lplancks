@@ -1,3 +1,4 @@
+cazzo
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
 #include <zephyr/init.h> // Header necessario per SYS_INIT
