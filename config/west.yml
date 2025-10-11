@@ -2,10 +2,15 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: awkannan  # <-- new entry
+      url-base: https://github.com/awkannan
   projects:
-    - name: zmk
-      remote: zmkfirmware
-      revision: main
+    - name: zmk # <-- modified entry
+      remote: awkannan
+      revision: develop
       import: app/west.yml
+    - name: zmk-smart-rgbled-widget  # <-- new entry
+      remote: awkannan
+      revision: main
   self:
     path: config
