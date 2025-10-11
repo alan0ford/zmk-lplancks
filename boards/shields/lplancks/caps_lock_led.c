@@ -1,7 +1,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
 #include <zephyr/init.h> // Header necessario per SYS_INIT
-#include <zmk/rgb_underglow.h>
+#include <zmk/behaviors/behavior_rgb_underglow.c>
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
