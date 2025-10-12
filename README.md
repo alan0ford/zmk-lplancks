@@ -7,6 +7,7 @@ Compact 40% layout with arrows:
 -   **MCU**: Tenstar NRF52840 (nice!nano v2 clone)
 -   **Case, Plate, Stab**: Handmade
 -   **PCB**: Handwired
+-   **LED**: #1 WS2812 (smartled)
 -   **Other photos**: [https://imgur.com/a/plancks-40thinnest-u0J52Yd](https://imgur.com/a/plancks-40thinnest-u0J52Yd)
 
 **Core**
@@ -15,7 +16,7 @@ Compact 40% layout with arrows:
 **MCU wiring**
 ![MCU wiring!](https://i.imgur.com/VJ6rP44.jpeg)
 
-**LED**
+**LED** (thank's Andrew Kannan module)
 ![LED](https://i.imgur.com/LOuTaSL.jpeg)
 
 **Profile**
