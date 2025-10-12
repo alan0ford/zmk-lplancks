@@ -291,28 +291,28 @@
 
         number_layer {
             bindings = <
-&kp GRAVE  &kp N1    &kp N2     &kp N3    &kp N4    &kp N5     &kp N6     &kp N7    &kp N8     &kp N9        &kp N0      &kp MINUS
-&kp TILDE  &kp EXCL  &kp AT     &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR      &kp RPAR    &kp HOME
-&trans     &kp NUBS  &trans     &trans    &trans    &trans     &ma_1      &ma_2     &ma_3      &ma_4         &kp FSLH    &kp PSCRN
-&trans     &trans    &kp LSHFT  &trans              &trans                &trans    &trans     &kp C_VOL_DN  &kp K_MUTE  &kp C_VOL_UP
+&kp GRAVE  &kp N1    &kp N2     &kp N3      &kp N4    &kp N5     &kp N6     &kp N7    &kp N8     &kp N9        &kp N0      &kp MINUS
+&kp TILDE  &kp EXCL  &kp AT     &kp RA(N5)  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR      &kp RPAR    &kp HOME
+&trans     &kp NUBS  &trans     &trans      &trans    &trans     &ma_1      &ma_2     &ma_3      &ma_4         &kp FSLH    &kp PSCRN
+&trans     &trans    &kp LSHFT  &trans                &trans                &trans    &trans     &kp C_VOL_DN  &kp K_MUTE  &kp C_VOL_UP
             >;
         };
 
         accent_layer {
             bindings = <
-&trans  &ma_5        &trans  &kp LBKT     &trans  &ma_6   &trans  &kp NUHS  &kp EQUAL        &kp SEMI  &ma_7    &kp PSCRN
-&trans  &kp SQT      &trans  &ma_8        &trans  &trans  &trans  &trans    &trans           &trans    &trans   &trans
-&kp F1  &kp F2       &kp F3  &kp F4       &kp F5  &kp F6  &kp F7  &kp F8    &kp F9           &kp F10   &kp F11  &kp F12
-&trans  &kp K_CMENU  &trans  &kp K_POWER          &trans          &trans    &kp RIGHT_SHIFT  &mo 3     &trans   &trans
+&trans  &ma_5        &trans         &kp LBKT     &trans  &ma_6   &trans  &kp NUHS  &kp EQUAL        &kp SEMI  &ma_7    &kp PSCRN
+&trans  &kp SQT      &trans         &ma_8        &trans  &trans  &trans  &trans    &trans           &trans    &trans   &trans
+&kp F1  &kp F2       &kp F3         &kp F4       &kp F5  &kp F6  &kp F7  &kp F8    &kp F9           &kp F10   &kp F11  &kp F12
+&trans  &kp K_CMENU  &kp RIGHT_ALT  &kp K_POWER          &trans          &trans    &kp RIGHT_SHIFT  &mo 3     &trans   &trans
             >;
         };
 
         symbol_layer {
             bindings = <
-&ind_bat	&trans  &trans	&ma_9	&trans	&trans			&trans			&ma_10			&ma_11			&ma_12			&trans			&trans
-&trans  &ma_13  &trans  &trans  &trans  &rgb_ug RGB_TOG &rgb_ug RGB_EFF &rgb_ug RGB_BRD &rgb_ug RGB_BRI &rgb_ug RGB_HUD &rgb_ug RGB_HUI &trans
-&trans  &out OUT_TOG &bt BT_NXT &bt BT_CLR_ALL &bt BT_PRV &bootloader &trans &trans &kp NUBS &kp RS(NUBS) &trans &trans
-&bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3                &trans                            &trans &trans &trans &trans &trans
+&ind_bat      &trans        &trans        &ma_9           &trans      &trans           &trans           &ma_10           &ma_11           &ma_12           &trans           &trans
+&trans        &ma_13        &trans        &trans          &trans      &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &trans
+&trans        &out OUT_TOG  &bt BT_NXT    &bt BT_CLR_ALL  &bt BT_PRV  &bootloader      &trans           &trans           &kp NUBS         &kp RS(NUBS)     &trans           &trans
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3                &trans                            &trans           &trans           &trans           &trans           &trans
             >;
         };
     };
