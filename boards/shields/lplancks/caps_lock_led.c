@@ -1,39 +1,48 @@
+// Questo file si trova in: config/boards/shields/lplancks/
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
+#include <zephyr/init.h> // Header per SYS_INIT
 #include <zmk/rgb_underglow.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
 
-// Prendiamo il riferimento al nostro LED dal DeviceTree usando l'alias "smartled"
+#include <zephyr/logging/log.h>
+LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
+
 static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
+static const struct led_rgb COLOR_CAPS_ON = { .r = 0xFF, .g = 0xFF, .b = 0xFF };
+static const struct led_rgb COLOR_CAPS_OFF = { .r = 0x00, .g = 0x00, .b = 0x00 };
 
-// Definiamo i colori che useremo
-static const struct led_rgb COLOR_CAPS_ON = { .r = 0xFF, .g = 0xFF, .b = 0xFF };   // Bianco
-static const struct led_rgb COLOR_CAPS_OFF = { .r = 0x00, .g = 0x00, .b = 0x00 };  // Spento
-
-// Questa funzione viene chiamata ogni volta che lo stato degli indicatori (Caps, Num, etc.) cambia
 static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
-    // Controlliamo che il nostro dispositivo LED sia pronto
+    LOG_DBG("Evento HID indicator ricevuto!");
+
     if (!device_is_ready(led_strip)) {
+        LOG_ERR("Dispositivo LED 'smartled' non pronto.");
         return ZMK_EV_EVENT_BUBBLE;
     }
 
-    // Prendiamo lo stato attuale degli indicatori
     zmk_hid_indicators_t indicators = zmk_hid_indicators_get_current_profile();
 
-    // Controlliamo se il bit del Caps Lock è attivo
     if (indicators & HID_USAGE_LED_CAPS_LOCK) {
-        // Se è attivo, impostiamo il colore a ON
+        LOG_INF("Caps Lock ATTIVO. Imposto il LED a bianco.");
         zmk_rgb_underglow_set_all(led_strip, &COLOR_CAPS_ON);
     } else {
-        // Altrimenti, lo impostiamo a OFF
+        LOG_INF("Caps Lock NON attivo. Spengo il LED.");
         zmk_rgb_underglow_set_all(led_strip, &COLOR_CAPS_OFF);
     }
 
     return ZMK_EV_EVENT_BUBBLE;
 }
 
-// Registriamo la nostra funzione come "ascoltatore" dell'evento giusto
 ZMK_LISTENER(caps_lock_led_listener, caps_lock_led_listener_cb);
 ZMK_SUBSCRIPTION(caps_lock_led_listener, zmk_hid_indicators_changed);
+
+// LA PROVA DEL NOVE: Questo codice viene eseguito all'avvio
+static int caps_led_init(void) {
+    // Questo messaggio DEVE comparire se il file viene compilato
+    LOG_ERR(">>> PROVA DEFINITIVA: Il file 'caps_lock_led.c' E' STATO COMPILATO! <<<");
+    return 0;
+}
+
+SYS_INIT(caps_led_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
