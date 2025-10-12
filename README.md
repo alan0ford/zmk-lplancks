@@ -22,4 +22,4 @@ Compact 40% layout with arrows:
 ![Profile](https://i.imgur.com/E1AXTUX.jpeg)
 
 **LED Video**
-<blockquote class="imgur-embed-pub" lang="en" data-id="2k90nAS"><a href="https://imgur.com/2k90nAS">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<blockquote class="imgur-embed-pub" lang="en" data-id="2k90nAS"><a href="https://imgur.com/2k90nAS">View post on imgur.com</a></blockquote>
