@@ -5,4 +5,7 @@ target_sources(app PRIVATE
   )
 
 zephyr_include_directories(include)
-set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/led_strip)
+
+idf_component_register(SRCS "blink_example_main.c"
+                       INCLUDE_DIRS "."
+                       PRIV_REQUIRES led_strip)
