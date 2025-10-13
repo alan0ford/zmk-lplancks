@@ -9,27 +9,27 @@ LOG_MODULE_REGISTER(caps_lock_led, LOG_LEVEL_INF);
 
 static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
 
-// Accende o spegne il primo LED WS2812 con colore bianco o spento
+static const struct led_rgb COLOR_CAPS_ON = { .r = 255, .g = 255, .b = 255 };
+static const struct led_rgb COLOR_CAPS_OFF = { .r = 0, .g = 0, .b = 0 };
+
 static void caps_lock_set_led(bool on) {
     if (!device_is_ready(led_strip)) {
         LOG_ERR("LED strip device non pronto");
         return;
     }
 
-    uint8_t color[3] = {0, 0, 0};
+    int rc;
     if (on) {
-        color[0] = 0xFF; // R
-        color[1] = 0xFF; // G
-        color[2] = 0xFF; // B
+        rc = led_strip_write_rgb(led_strip, 0, 1, &COLOR_CAPS_ON);
+    } else {
+        rc = led_strip_write_rgb(led_strip, 0, 1, &COLOR_CAPS_OFF);
     }
 
-    int rc = led_strip_write(led_strip, 0, 1, color);
     if (rc) {
         LOG_ERR("Errore scrittura led_strip: %d", rc);
     }
 }
 
-// Callback evento HID Indicator cambiato
 static int caps_lock_listener_cb(const zmk_event_t *eh) {
     zmk_hid_indicators_t indicators = zmk_hid_indicators_get_current_profile();
     bool caps_on = (indicators & HID_USAGE_LED_CAPS_LOCK) != 0;
@@ -42,7 +42,6 @@ static int caps_lock_listener_cb(const zmk_event_t *eh) {
 ZMK_LISTENER(caps_lock_led_listener, caps_lock_listener_cb);
 ZMK_SUBSCRIPTION(caps_lock_led_listener, zmk_hid_indicators_changed);
 
-// Funzione init per debug
 static int caps_lock_led_init(const struct device *dev) {
     ARG_UNUSED(dev);
     LOG_INF("caps_lock_led driver avviato");
