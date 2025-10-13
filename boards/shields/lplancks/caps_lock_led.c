@@ -7,7 +7,7 @@
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
-
+cazzo
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
 
