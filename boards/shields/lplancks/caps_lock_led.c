@@ -9,24 +9,22 @@ LOG_MODULE_REGISTER(caps_lock_led, LOG_LEVEL_INF);
 
 static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
 
-static const struct led_rgb COLOR_CAPS_ON = { .r = 255, .g = 255, .b = 255 };
-static const struct led_rgb COLOR_CAPS_OFF = { .r = 0, .g = 0, .b = 0 };
-
 static void caps_lock_set_led(bool on) {
     if (!device_is_ready(led_strip)) {
         LOG_ERR("LED strip device non pronto");
         return;
     }
 
-    int rc;
+    uint8_t color[3] = {0, 0, 0};
     if (on) {
-        rc = led_strip_write_rgb(led_strip, 0, 1, &COLOR_CAPS_ON);
-    } else {
-        rc = led_strip_write_rgb(led_strip, 0, 1, &COLOR_CAPS_OFF);
+        color[0] = 255; // rosso
+        color[1] = 255; // verde
+        color[2] = 255; // blu
     }
 
-    if (rc) {
-        LOG_ERR("Errore scrittura led_strip: %d", rc);
+    int err = led_strip_write(led_strip, 0, 1, color);
+    if (err) {
+        LOG_ERR("Errore scrittura LED strip: %d", err);
     }
 }
 
