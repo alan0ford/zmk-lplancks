@@ -1,13 +1,12 @@
 // Questo file si trova in: config/boards/shields/lplancks/
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
-#include <drivers/led_strip.h>
+#include <zephyr/drivers/led_strip.h>
 #include <zephyr/init.h> // Header per SYS_INIT
 #include <zmk/rgb_underglow.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
-cazzo
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
 
