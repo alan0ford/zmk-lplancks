@@ -1,13 +1,14 @@
-// Questo file si trova in: config/boards/shields/lplancks/
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/led_strip.h>
-#include <zephyr/init.h> // Header per SYS_INIT
+#include <zephyr/drivers/led.h>
+#include <zephyr/init.h>
 #include <zmk/rgb_underglow.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
 #include <zephyr/logging/log.h>
+
 LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
 
 static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
@@ -26,10 +27,10 @@ static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
 
     if (indicators & HID_USAGE_LED_CAPS_LOCK) {
         LOG_INF("Caps Lock ATTIVO. Imposto il LED a bianco.");
-        zmk_rgb_underglow_set_all(led_strip, &COLOR_CAPS_ON);
+        zmk_rgb_underglow_set_hsb(led_strip, &COLOR_CAPS_ON);
     } else {
         LOG_INF("Caps Lock NON attivo. Spengo il LED.");
-        zmk_rgb_underglow_set_all(led_strip, &COLOR_CAPS_OFF);
+        zmk_rgb_underglow_set_hsb(led_strip, &COLOR_CAPS_OFF);
     }
 
     return ZMK_EV_EVENT_BUBBLE;
@@ -38,9 +39,7 @@ static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
 ZMK_LISTENER(caps_lock_led_listener, caps_lock_led_listener_cb);
 ZMK_SUBSCRIPTION(caps_lock_led_listener, zmk_hid_indicators_changed);
 
-// LA PROVA DEL NOVE: Questo codice viene eseguito all'avvio
 static int caps_led_init(void) {
-    // Questo messaggio DEVE comparire se il file viene compilato
     LOG_ERR(">>> PROVA DEFINITIVA: Il file 'caps_lock_led.c' E' STATO COMPILATO! <<<");
     return 0;
 }
