@@ -11,8 +11,8 @@
 LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
 
 static const struct device *led_strip = DEVICE_DT_GET(DT_ALIAS(smartled));
-static const struct led_rgb COLOR_CAPS_ON = { .r = 0xFF, .g = 0xFF, .b = 0xFF };
-static const struct led_rgb COLOR_CAPS_OFF = { .r = 0x00, .g = 0x00, .b = 0x00 };
+// static const struct led_rgb COLOR_CAPS_ON = { .r = 0xFF, .g = 0xFF, .b = 0xFF };
+// static const struct led_rgb COLOR_CAPS_OFF = { .r = 0x00, .g = 0x00, .b = 0x00 };
 
 static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
     LOG_DBG("Evento HID indicator ricevuto!");
@@ -25,11 +25,11 @@ static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
     zmk_hid_indicators_t indicators = zmk_hid_indicators_get_current_profile();
 
     if (indicators & HID_USAGE_LED_CAPS_LOCK) {
-        LOG_INF("Caps Lock ATTIVO. Imposto il LED a bianco.");
-        zmk_rgb_underglow_set_all(led_strip, &COLOR_CAPS_ON);
+        LOG_INF("Caps Lock ATTIVO. Imposto il LED a blu.");
+        zmk_rgb_underglow_set_hsb(240, 100, 100);
     } else {
         LOG_INF("Caps Lock NON attivo. Spengo il LED.");
-        zmk_rgb_underglow_set_all(led_strip, &COLOR_CAPS_OFF);
+        zmk_rgb_underglow_set_hsb(0, 0, 0);
     }
 
     return ZMK_EV_EVENT_BUBBLE;
