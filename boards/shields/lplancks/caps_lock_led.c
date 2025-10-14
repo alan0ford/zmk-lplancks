@@ -2,10 +2,12 @@
 #include <zephyr/device.h>
 #include <zephyr/init.h>
 #include <zmk/rgb_underglow.h>
+#include <zmk/rgb_types.h>  
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
 #include <zephyr/logging/log.h>
+
 
 LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
 
@@ -14,14 +16,20 @@ static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
 
     zmk_hid_indicators_t indicators = zmk_hid_indicators_get_current_profile();
 
+    struct zmk_led_hsb color;
+	
     if (indicators & HID_USAGE_LED_CAPS_LOCK) {
-        LOG_INF("Caps Lock ATTIVO. Accendo LED blu.");
-        zmk_rgb_underglow_set_hsb((uint16_t)240, (uint8_t)100, (uint8_t)100);
+        color.h = (uint8_t)((240 * 255) / 360);  // scala da 0-360 a 0-255
+        color.s = 255;                          // max saturazione
+        color.b = 255;                          // max brightness
     } else {
-        LOG_INF("Caps Lock DISATTIVO. Spengo LED.");
-        zmk_rgb_underglow_set_hsb((uint16_t)0, (uint8_t)0, (uint8_t)0);
+        color.h = 0;
+        color.s = 0;
+        color.b = 0;
     }
 
+    zmk_rgb_underglow_set_hsb(color);
+	
     return ZMK_EV_EVENT_BUBBLE;
 }
 
