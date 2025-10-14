@@ -2,7 +2,6 @@
 #include <zephyr/device.h>
 #include <zephyr/init.h>
 #include <zmk/rgb_underglow.h>
-#include <zmk/rgb_types.h>  
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
