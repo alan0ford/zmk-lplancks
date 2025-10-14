@@ -15,11 +15,11 @@ static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
     zmk_hid_indicators_t indicators = zmk_hid_indicators_get_current_profile();
 
     if (indicators & HID_USAGE_LED_CAPS_LOCK) {
-        LOG_INF("Caps Lock ATTIVO. Imposto il LED a blu.");
-        zmk_rgb_underglow_set_hsb(240, 100, 100); // hue=240°, saturation=100%, brightness=100%
+        LOG_INF("Caps Lock ATTIVO. Accendo LED blu.");
+        zmk_rgb_underglow_set_hsb((uint16_t)240, (uint8_t)100, (uint8_t)100);
     } else {
-        LOG_INF("Caps Lock NON attivo. Spengo il LED.");
-        zmk_rgb_underglow_set_hsb(0, 0, 0); // spegni LED
+        LOG_INF("Caps Lock DISATTIVO. Spengo LED.");
+        zmk_rgb_underglow_set_hsb((uint16_t)0, (uint8_t)0, (uint8_t)0);
     }
 
     return ZMK_EV_EVENT_BUBBLE;
@@ -30,7 +30,7 @@ ZMK_SUBSCRIPTION(caps_lock_led_listener, zmk_hid_indicators_changed);
 
 static int caps_led_init(const struct device *dev) {
     ARG_UNUSED(dev);
-    LOG_ERR(">>> PROVA DEFINITIVA: Il file 'caps_lock_led.c' È STATO COMPILATO! <<<");
+    LOG_INF("caps_lock_led driver avviato.");
     return 0;
 }
 
