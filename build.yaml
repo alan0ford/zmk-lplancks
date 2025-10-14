@@ -16,8 +16,12 @@
 #     snippet: studio-rpc-usb-uart
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
-#
+    
 include:
   - board: nice_nano_v2
     shield: lplancks
     snippet: zmk-usb-logging
+    # Questa riga forza l'attivazione del modulo RGB Underglow
+    # direttamente nel comando di build, bypassando possibili
+    # problemi con i file .conf.
+    cmake-args: -DCONFIG_ZMK_RGB_UNDERGLOW=y
