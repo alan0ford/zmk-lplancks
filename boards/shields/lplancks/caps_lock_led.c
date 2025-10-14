@@ -1,15 +1,8 @@
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
-#include <zephyr/drivers/led_strip.h>
 #include <zephyr/init.h>
 #include <zmk/rgb_underglow.h>
-#include <zmk/event_manager.h>
-#include <zmk/events/hid_indicators_changed.h>
-#include <zmk/hid_indicators.h>
-#include <zephyr/kernel.h>
-#include <zephyr/device.h>
-#include <zephyr/init.h>
-#include <zmk/rgb_underglow.h>
+#include <zmk/rgb_types.h>  // Include per struct hsb_color
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/hid_indicators.h>
