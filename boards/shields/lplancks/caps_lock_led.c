@@ -7,7 +7,7 @@
 #include <zmk/rgb_underglow.h>
 
 #define COLOR_OFF   {0,0,0}
-#define COLOR_ON    {240, 100, 100}
+#define COLOR_ON    {0, 0, 100}
 
 static void set_capslock_led(bool caps_on) {
     struct zmk_led_hsb color = caps_on ? (struct zmk_led_hsb)COLOR_ON : (struct zmk_led_hsb)COLOR_OFF;
