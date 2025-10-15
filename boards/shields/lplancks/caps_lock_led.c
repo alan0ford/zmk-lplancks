@@ -14,7 +14,6 @@ LOG_MODULE_REGISTER(capslock_indicator, LOG_LEVEL_DBG);
 
 static void set_capslock_led(bool caps_on) {
     struct zmk_led_hsb color = caps_on ? (struct zmk_led_hsb)COLOR_ON : (struct zmk_led_hsb)COLOR_OFF;
-    zmk_rgb_underglow_select_effect(UNDERGLOW_EFFECT_SOLID);
     zmk_rgb_underglow_set_hsb(color);
     if (caps_on) {
         zmk_rgb_underglow_on();
