@@ -22,7 +22,6 @@
   pinctrl-1 = <&spi3_sleep>;
   pinctrl-names = "default", "sleep";
 
-  // NUOVA ETICHETTA "smartled"
   smartled: ws2812@0 {
     compatible = "worldsemi,ws2812-spi";
     reg = <0>;
@@ -37,14 +36,12 @@
 
 / {
     aliases {
-        // NUOVO ALIAS "smartled" CHE PUNTA ALL'ETICHETTA "smartled"
         smartled = &smartled;
     };
 
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
-        // USIAMO IL NUOVO NODO "smartled"
 		zmk,underglow = &smartled;
     };
 
