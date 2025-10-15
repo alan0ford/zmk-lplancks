@@ -9,8 +9,7 @@
 
 LOG_MODULE_REGISTER(caps_led_debug, LOG_LEVEL_DBG);
 
-#define CAPS_LED_NODE DT_ALIAS(smartled)
-static const struct device *caps_led = DEVICE_DT_GET(CAPS_LED_NODE);
+static const struct device *caps_led;
 
 static void set_caps_led(bool caps_on) {
     if (!device_is_ready(caps_led)) {
@@ -41,6 +40,9 @@ ZMK_SUBSCRIPTION(caps_lock_led_listener, zmk_hid_indicators_changed);
 
 static int caps_led_init(const struct device *dev) {
     ARG_UNUSED(dev);
+    // Prova a ottenere il device tramite binding
+    caps_led = device_get_binding("WS2812");
+    LOG_INF("caps_led device pointer: %p", caps_led);
     set_caps_led(false); // all'avvio LED spento
     return 0;
 }
