@@ -21,17 +21,16 @@ static void set_caps_led(bool caps_on) {
     if (caps_on) {
         leds[0].r = 0;
         leds[0].g = 0;
-        leds[0].b = 255; // blu
+        leds[0].b = 255; // blu acceso
     } else {
         leds[0].r = 0;
         leds[0].g = 0;
-        leds[0].b = 0; // spento
+        leds[0].b = 0;   // spento
     }
     led_strip_update_rgb(caps_led, leds, ARRAY_SIZE(leds));
 }
 
 static int caps_lock_led_listener_cb(const zmk_event_t *eh) {
-    LOG_DBG("Evento HID indicator ricevuto!");
     zmk_hid_indicators_t indicators = zmk_hid_indicators_get_current_profile();
     set_caps_led(indicators & HID_USAGE_LED_CAPS_LOCK);
     return ZMK_EV_EVENT_BUBBLE;
@@ -42,7 +41,6 @@ ZMK_SUBSCRIPTION(caps_lock_led_listener, zmk_hid_indicators_changed);
 
 static int caps_led_init(const struct device *dev) {
     ARG_UNUSED(dev);
-    LOG_INF("caps_lock_led driver avviato.");
     set_caps_led(false); // all'avvio LED spento
     return 0;
 }
