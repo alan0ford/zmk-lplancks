@@ -261,6 +261,24 @@
                 <&macro_release>,
                 <&kp LALT>;
         };
+
+        ma_14: ma_14 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LGUI>,
+                <&macro_press>,
+                <&kp LSHIFT>,
+                <&macro_tap>,
+                <&kp S>,
+                <&macro_release>,
+                <&kp LSHIFT>,
+                <&macro_release>,
+                <&kp LGUI>;
+
+            label = "MA_14";
+        };
     };
 };
 
@@ -300,7 +318,7 @@
         accent_layer {
             bindings = <
 &trans  &ma_5        &trans         &kp LBKT     &trans  &ma_6   &trans  &kp NUHS  &kp EQUAL        &kp SEMI  &ma_7    &kp PSCRN
-&trans  &kp SQT      &trans         &ma_8        &trans  &trans  &trans  &trans    &trans           &trans    &trans   &trans
+&trans  &kp SQT      &ma_14         &ma_8        &trans  &trans  &trans  &trans    &trans           &trans    &trans   &trans
 &kp F1  &kp F2       &kp F3         &kp F4       &kp F5  &kp F6  &kp F7  &kp F8    &kp F9           &kp F10   &kp F11  &kp F12
 &trans  &kp K_CMENU  &kp RIGHT_ALT  &kp K_POWER          &trans          &trans    &kp RIGHT_SHIFT  &mo 3     &trans   &trans
             >;
@@ -308,7 +326,7 @@
 
         symbol_layer {
             bindings = <
-&trans      &trans        &trans        &ma_9           &trans      &trans           &trans           &ma_10           &ma_11           &ma_12           &trans           &trans
+&trans        &trans        &trans        &ma_9           &trans      &trans           &trans           &ma_10           &ma_11           &ma_12           &trans           &trans
 &trans        &ma_13        &trans        &trans          &trans      &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &trans
 &trans        &out OUT_TOG  &bt BT_NXT    &bt BT_CLR_ALL  &bt BT_PRV  &bootloader      &trans           &trans           &kp NUBS         &kp RS(NUBS)     &trans           &trans
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3                &trans                            &trans           &trans           &trans           &trans           &trans
