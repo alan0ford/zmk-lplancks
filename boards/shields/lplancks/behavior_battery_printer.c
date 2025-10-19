@@ -1,9 +1,6 @@
 /*
- * Minimal ZMK behavior: types battery percentage digits when activated.
+ * Minimal ZMK behavior: types battery percentage with a label when activated.
  * Uses zmk_battery_state_of_charge().
- *
- * Stepwise approach: this file only. Add to repo first, then in a next step
- * we will update app/CMakeLists.txt to include it in the build.
  */
 
 #define DT_DRV_COMPAT zmk_behavior_battery_printer
@@ -19,7 +16,8 @@
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#define MAX_CHARS 8
+/* increased buffer to contain prefix + digits + space + percent */
+#define MAX_CHARS 32
 #define TYPE_DELAY_MS 10
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
@@ -49,6 +47,109 @@ static const uint32_t digit_keycodes[10] = {
     NUMBER_5, NUMBER_6, NUMBER_7, NUMBER_8, NUMBER_9
 };
 
+/* map an ASCII char used in our phrase to an encoded keycode understood by
+ * raise_zmk_keycode_state_changed_from_encoded().
+ *
+ * Supports:
+ *  - digits '0'..'9' -> top-row NUMBER_*
+ *  - letters a..z / A..Z -> letter keycodes (uppercase uses LS(...) to require shift)
+ *  - space ' ' -> SPACE
+ *  - dot '.' -> DOT
+ *  - percent '%' -> PERCENT (macro includes shift)
+ */
+static uint32_t char_to_encoded_keycode(uint8_t ch) {
+    /* digits */
+    if (ch >= '0' && ch <= '9') {
+        return digit_keycodes[ch - '0'];
+    }
+
+    /* space */
+    if (ch == ' ') {
+        return SPACE;
+    }
+
+    /* dot/period */
+    if (ch == '.') {
+        return DOT;
+    }
+
+    /* percent sign (uses define that includes shift) */
+    if (ch == '%') {
+        return PERCENT;
+    }
+
+    /* letters */
+    /* map lowercase and uppercase by explicit cases to use the key macros defined
+     * in dt-bindings/zmk/keys.h. For uppercase, wrap with LS(...) so Shift is sent.
+     *
+     * Note: LS(...) and letter macros (A, B, C, ...) are available via keys headers.
+     * If for some reason LS isn't defined in your build, we can instead press/release
+     * an explicit SHIFT key around the letter; tell me if LS isn't available.
+     */
+    bool upper = false;
+    if (ch >= 'A' && ch <= 'Z') {
+        upper = true;
+        ch = (uint8_t)(ch - 'A' + 'a'); /* normalize to lowercase for switch */
+    }
+
+    switch (ch) {
+    case 'a':
+        return upper ? LS(A) : A;
+    case 'b':
+        return upper ? LS(B) : B;
+    case 'c':
+        return upper ? LS(C) : C;
+    case 'd':
+        return upper ? LS(D) : D;
+    case 'e':
+        return upper ? LS(E) : E;
+    case 'f':
+        return upper ? LS(F) : F;
+    case 'g':
+        return upper ? LS(G) : G;
+    case 'h':
+        return upper ? LS(H) : H;
+    case 'i':
+        return upper ? LS(I) : I;
+    case 'j':
+        return upper ? LS(J) : J;
+    case 'k':
+        return upper ? LS(K) : K;
+    case 'l':
+        return upper ? LS(L) : L;
+    case 'm':
+        return upper ? LS(M) : M;
+    case 'n':
+        return upper ? LS(N) : N;
+    case 'o':
+        return upper ? LS(O) : O;
+    case 'p':
+        return upper ? LS(P) : P;
+    case 'q':
+        return upper ? LS(Q) : Q;
+    case 'r':
+        return upper ? LS(R) : R;
+    case 's':
+        return upper ? LS(S) : S;
+    case 't':
+        return upper ? LS(T) : T;
+    case 'u':
+        return upper ? LS(U) : U;
+    case 'v':
+        return upper ? LS(V) : V;
+    case 'w':
+        return upper ? LS(W) : W;
+    case 'x':
+        return upper ? LS(X) : X;
+    case 'y':
+        return upper ? LS(Y) : Y;
+    case 'z':
+        return upper ? LS(Z) : Z;
+    default:
+        return 0;
+    }
+}
+
 static void send_key(struct behavior_battery_printer_data *data) {
     if (data->current_idx >= data->chars_len || data->current_idx >= ARRAY_SIZE(data->chars)) {
         reset_typing_state(data);
@@ -56,12 +157,9 @@ static void send_key(struct behavior_battery_printer_data *data) {
     }
 
     uint8_t ch = data->chars[data->current_idx];
-    uint32_t keycode = 0;
-
-    if (ch >= '0' && ch <= '9') {
-        keycode = digit_keycodes[ch - '0'];
-    } else {
-        LOG_WRN("behavior_battery_printer: unsupported char '%c'", ch);
+    uint32_t keycode = char_to_encoded_keycode(ch);
+    if (!keycode) {
+        LOG_WRN("behavior_battery_printer: unsupported char '%c' (idx %u)", ch, data->current_idx);
         reset_typing_state(data);
         return;
     }
@@ -117,7 +215,7 @@ static void uint_to_chars(uint32_t v, uint8_t *buffer, uint8_t *len) {
     *len = t;
 }
 
-/* on_pressed: read actual battery SOC and type it */
+/* on_pressed: build literal "Level Bat. " + digits + " %" and type it */
 static int on_pressed(struct zmk_behavior_binding *binding, struct zmk_behavior_binding_event event) {
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     struct behavior_battery_printer_data *data = dev->data;
@@ -131,13 +229,39 @@ static int on_pressed(struct zmk_behavior_binding *binding, struct zmk_behavior_
     uint8_t percent = zmk_battery_state_of_charge();
     if (percent > 100) percent = 100;
 
-    /* LOG the read value (helpful for debugging if it is 0) */
     LOG_INF("behavior_battery_printer: battery SOC read = %u%%", percent);
 
     reset_typing_state(data);
-    uint_to_chars(percent, data->chars, &data->chars_len);
+
+    /* prefix exactly as requested (capital L and B) */
+    const char *prefix = "Level Bat. ";
+    size_t p = strlen(prefix);
+
+    /* ensure buffer fits */
+    if (p + 4 + 3 >= ARRAY_SIZE(data->chars)) { /* prefix + up to 3 digits + space + percent */
+        LOG_ERR("behavior_battery_printer: buffer too small for prefix");
+        return ZMK_BEHAVIOR_OPAQUE;
+    }
+
+    /* copy prefix */
+    memcpy(data->chars, prefix, p);
+    data->chars_len = p;
+
+    /* append digits of percent */
+    uint8_t digitbuf[4];
+    uint8_t digitlen = 0;
+    uint_to_chars(percent, digitbuf, &digitlen);
+    for (int i = 0; i < digitlen; i++) {
+        data->chars[data->chars_len++] = digitbuf[i];
+    }
+
+    /* append space and percent sign */
+    data->chars[data->chars_len++] = ' ';
+    data->chars[data->chars_len++] = '%';
 
     /* start typing */
+    data->current_idx = 0;
+    data->key_pressed = false;
     send_key(data);
     return ZMK_BEHAVIOR_OPAQUE;
 }
