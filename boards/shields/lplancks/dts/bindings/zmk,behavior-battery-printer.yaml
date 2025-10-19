@@ -1,7 +1,5 @@
 compatible: "zmk,behavior-battery-printer"
 description: "Minimal binding schema for a behavior that types battery percentage."
-maintainers:
-  - "alan0ford"
 properties:
   label:
     type: string
