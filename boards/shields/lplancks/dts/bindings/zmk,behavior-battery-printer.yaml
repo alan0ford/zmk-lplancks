@@ -1,7 +1,4 @@
+# SPDX-License-Identifier: MIT
+description: "Behavior that types the battery percentage (digits only)."
 compatible: "zmk,behavior-battery-printer"
-description: "Minimal binding schema for a behavior that types battery percentage."
-properties:
-  "#binding-cells":
-    type: integer
-  label:
-    type: string
+include: zero_param.yaml
