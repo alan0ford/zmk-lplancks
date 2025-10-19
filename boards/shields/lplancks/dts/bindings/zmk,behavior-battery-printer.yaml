@@ -1,0 +1,14 @@
+compatible: "zmk,behavior-battery-printer"
+title: "ZMK behavior - battery printer"
+description: |
+  Minimal binding schema for a behavior that types battery percentage.
+maintainers:
+  - "alan0ford"
+properties:
+  label:
+    type: string
+  "#binding-cells":
+    type: integer
+required:
+  - "#binding-cells"
+additionalProperties: true
