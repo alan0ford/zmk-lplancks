@@ -111,6 +111,8 @@ static void uint_to_chars(uint32_t v, uint8_t *buffer, uint8_t *len) {
     *len = t;
 }
 
+/* Replace the on_pressed function with this test version that forces percent = 95 */
+
 static int on_pressed(struct zmk_behavior_binding *binding, struct zmk_behavior_binding_event event) {
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     struct behavior_battery_printer_data *data = dev->data;
@@ -120,8 +122,8 @@ static int on_pressed(struct zmk_behavior_binding *binding, struct zmk_behavior_
         return ZMK_BEHAVIOR_OPAQUE;
     }
 
-    /* get battery percentage (0..100) */
-    uint8_t percent = zmk_battery_state_of_charge();
+    /* TEST: force a known percentage to validate typing logic */
+    uint8_t percent = 95; /* <- change this value if you want to test other cases */
     if (percent > 100) percent = 100;
 
     reset_typing_state(data);
