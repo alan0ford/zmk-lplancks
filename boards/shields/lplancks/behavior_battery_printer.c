@@ -43,6 +43,12 @@ static inline void reset_typing_state(struct behavior_battery_printer_data *data
     memset(data->chars, 0, sizeof(data->chars));
 }
 
+/* explicit mapping for top-row digits (safe) */
+static const uint32_t digit_keycodes[10] = {
+    NUMBER_0, NUMBER_1, NUMBER_2, NUMBER_3, NUMBER_4,
+    NUMBER_5, NUMBER_6, NUMBER_7, NUMBER_8, NUMBER_9
+};
+
 static void send_key(struct behavior_battery_printer_data *data) {
     if (data->current_idx >= data->chars_len || data->current_idx >= ARRAY_SIZE(data->chars)) {
         reset_typing_state(data);
@@ -53,7 +59,7 @@ static void send_key(struct behavior_battery_printer_data *data) {
     uint32_t keycode = 0;
 
     if (ch >= '0' && ch <= '9') {
-        keycode = NUMBER_0 + (ch - '0');
+        keycode = digit_keycodes[ch - '0'];
     } else {
         LOG_WRN("behavior_battery_printer: unsupported char '%c'", ch);
         reset_typing_state(data);
